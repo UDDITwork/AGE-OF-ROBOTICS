@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Website with ChatGPT Integration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #1a1a1a, #333);
+      color: #fff;
+      padding: 20px;
+    }
+    a {
+      color: #FF1493;
+      text-decoration: none;
+    }
+
+    /* Header and Navigation */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+    nav ul li {
+      margin-left: 20px;
+    }
+    nav ul li a {
+        text-decoration-color: #fff;
+      padding: 10px 20px;
+      color: #ffffff;
+      background-color: #FF1493;
+      border-radius: 30px;
+      transition: background-color 0.3s;
+    }
+    nav ul li a:hover {
+      background-color: #9400D3;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin: 50px 0;
+    }
+    .hero h1 {
+      font-size: 3em;
+      color: #FF1493;
+    }
+    .hero p {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #ddd;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .search-bar input {
+      padding: 10px;
+      font-size: 1.2em;
+      width: 50%;
+      border-radius: 25px;
+      border: 2px solid #FF1493;
+      outline: none;
+    }
+
+    .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            flex-grow: 1;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: white;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .gmail-btn {
+            background-color: #D44638;
+            color: white;
+        }
+
+        .image-slider {
+            overflow: hidden;
+            white-space: nowrap;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .image-container {
+            display: inline-block;
+            animation: slide 50s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .image-block {
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+            margin-right: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-block img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .image-block:hover img {
+            transform: scale(1.1);
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 800px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .image-block {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .image-slider {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .image-slider::-webkit-scrollbar {
+                display: none;
+            }
+
+            .image-container {
+                animation: none;
+                display: inline-flex;
+                padding-bottom: 10px;
+            }
+        }
+
+    /* Image Grid */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 50px 0;
+    }
+    .grid-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #111;
+      color: #fff;
+      margin-top: 50px;
+      border-top: 1px solid #333;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+      .search-bar input {
+        width: 90%;
+      }
+    }
+    .cards-container {
+          position: relative;
+          width: 90%;
+          max-width: 1200px;
+          display: flex;
+          justify-content: space-between;
+        }
+    
+        .card {
+  position: relative;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  width: 300px;
+  height: 200px;
+  margin-right: -60px; /* To create the overlap effect */
+  border-radius: 15px; /* Rounded corners */
+  border: 2px solid white; /* White border around the card */
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left; /* Align the text to the left */
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  z-index: 10;
+}
+        .card:nth-child(2) {
+          margin-left: -20%;
+        }
+    
+        .card:nth-child(3) {
+          margin-left: -20%;
+        }
+    
+        .card:nth-child(4) {
+          margin-left: -20%;
+        }
+    
+        .card:nth-child(5) {
+          margin-left: -20%;
+        }
+    
+        .card:nth-child(6) {
+          margin-left: -20%;
+        }
+    
+        .card:nth-child(7) {
+          margin-left: -20%;
+        }
+    
+        .card:nth-child(8) {
+          margin-left: -20%;
+        }
+    
+        .card:nth-child(9) {
+          margin-left: -20%;
+        }
+    
+        .card:nth-child(10) {
+          margin-left: -20%;
+        }
+    
+        /* Media queries for responsiveness */
+        @media (max-width: 1024px) {
+          .card {
+            width: 40%;
+            height: 150px;
+          }
+        }
+    
+        @media (max-width: 768px) {
+          .card {
+            width: 60%;
+            height: 120px;
+          }
+          .card:nth-child(2),
+          .card:nth-child(3),
+          .card:nth-child(4),
+          .card:nth-child(5),
+          .card:nth-child(6),
+          .card:nth-child(7),
+          .card:nth-child(8),
+          .card:nth-child(9),
+          .card:nth-child(10) {
+            margin-left: -15%;
+          }
+        }
+    
+        @media (max-width: 480px) {
+          .card {
+            width: 80%;
+            height: 100px;
+          }
+          .card:nth-child(2),
+          .card:nth-child(3),
+          .card:nth-child(4),
+          .card:nth-child(5),
+          .card:nth-child(6),
+          .card:nth-child(7),
+          .card:nth-child(8),
+          .card:nth-child(9),
+          .card:nth-child(10) {
+            margin-left: -10%;
+          }
+        }
+        .m{text-align:left;
+        }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1 class="m">Enigma,<br>
+    The Next Generation Reinforced Robotics</h1>
+  <nav>
+    <ul>
+      <li><a href="god.html">Home</a></li>
+      <li><a href="lord.html">About</a></li>
+      <li><a href="master.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="hero">
+  <h1>Explore the Future with AI</h1>
+  <p>Your journey to advanced AI begins here.</p>
+</div>
+<div class="search-container">
+    <h1>Ask ChatGPT a Question</h1>
+    <input type="text" id="queryInput" class="search-bar" placeholder="Type your query here...">
+    <button class="search-button" onclick="askChatGPT()">Submit</button>
+
+    <div class="response-container" id="responseContainer">
+        <!-- The response will be displayed here -->
+    </div>
+</div>
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Ask anything to AI...">
+  <button onclick="getAnswer()">Search</button>
+</div>
+
+<div class="container">
+    
+    <div class="image-slider">
+        <div class="image-container">
+            <a href="https://www.aamirshaikh.net/" target="_blank" class="image-block"><img src="https://picsum.photos/150/150?random=1" alt="Aamir Shaikh"></a>
+            <a href="https://www.guruduttperi.com/" target="_blank" class="image-block"><img src="https://picsum.photos/150/150?random=2" alt="Gurudutt Peri"></a>
+            <a href="https://www.karenhutton.com/" target="_blank" class="image-block"><img src="https://picsum.photos/150/150?random=3" alt="Karen Hutton"></a>
+            <a href="https://alexsexton.com/" target="_blank" class="image-block"><img src="https://picsum.photos/150/150?random=4" alt="Alex Sexton"></a>
+            <a href="https://www.vibor.it/" target="_blank" class="image-block"><img src="https://picsum.photos/150/150?random=5" alt="Vibor"></a>
+            <a href="https://www.walmart.com/" target="_blank" class="image-block"><img src="https://picsum.photos/150/150?random=6" alt="Walmart"></a>
+            <a href="https://www.stutpak.com/" target="_blank" class="image-block"><img src="https://picsum.photos/150/150?random=7" alt="Stutpak"></a>
+            <a href="https://lovvelavva.com/" target="_blank" class="image-block"><img src="https://picsum.photos/150/150?random=8" alt="Lovve Lavva"></a>
+            <a href="https://www.amazon.com/" target="_blank" class="image-block"><img src="https://picsum.photos/150/150?random=9" alt="Amazon"></a>
+            <a href="https://www.github.com/" target="_blank" class="image-block"><img src="https://picsum.photos/150/150?random=10" alt="GitHub"></a>
+        </div>
+    </div>
+</div>
+
+<!-- Image Grid Section -->
+<div class="grid-container">
+  <div class="grid-item"><img src="jui.png" alt="Grid Image 1"></div>
+  <div class="grid-item"><img src="lop.png" alt="Grid Image 2"></div>
+  <div class="grid-item"><img src="meena.png" alt="Grid Image 3"></div>
+  <div class="grid-item"><img src="jui.png" alt="Grid Image 1"></div>
+  <div class="grid-item"><img src="lop.png" alt="Grid Image 2"></div>
+  <div class="grid-item"><img src="meena.png" alt="Grid Image 3"></div>
+  <div class="grid-item"><img src="jui.png" alt="Grid Image 1"></div>
+  <div class="grid-item"><img src="lop.png" alt="Grid Image 2"></div>
+  <div class="grid-item"><img src="meena.png" alt="Grid Image 3"></div>
+</div>
+<div class="cards-container">
+    <div class="card" data-page="QLearning.html">Q-Learning</div>
+    <div class="card" data-page="DeepQ-Networks(DQN).html">Deep Q-Networks (DQN)</div>
+    <div class="card" data-page="ProximalPolicyOptimization(PPO).html">Proximal Policy Optimization (PPO)</div>
+    <div class="card" data-page="PolicyGradientMethods.html">Policy Gradient Methods</div>
+    <div class="card" data-page="DeepDeterministicPolicyGradient(DDPG).html">Deep Deterministic Policy Gradient (DDPG)</div>
+    <div class="card" data-page="InverseKinematicsAlgorithms.html">Inverse Kinematics Algorithms</div>
+    <div class="card" data-page="SLAM(SimultaneousLocalizationandMapping).html">SLAM (Simultaneous Localization and Mapping)</div>
+    <div class="card" data-page="Rapidly-exploringRandomTrees(RRT).html">Rapidly-exploring Random Trees (RRT)</div>
+    <div class="card" data-page="GeneticAlgorithms.html">Genetic Algorithms</div>
+    <div class="card" data-page="MonteCarloTreeSearch(MCTS).html">Monte Carlo Tree Search (MCTS)</div>
+</div>
+<div class="bearch-container">
+    <h1>Search Local Internet Websites</h1>
+    <input type="text" id="bearchQuery" class="bearch-bar" placeholder="Type your query here...">
+    <button class="bearch-button" onclick="performSearch()">Search</button>
+
+    <div class="result-links" id="resultLinks">
+        <!-- Search links will appear here -->
+    </div>
+</div>
+<!-- Footer Section -->
+<footer>
+  <p>&copy; 2024 My Awesome Website | All rights reserved.</p>
+</footer>
+    <script>
+    // List of websites with customized search query formats
+    const websites = [
+        {
+            name: "DeepMind",
+            url: "https://deepmind.google/search/?query="
+        },
+        {
+            name: "Stefanini",
+            url: "https://stefanini.com/en?s="
+        },
+        {
+            name: "FutureLearn",
+            url: "https://www.futurelearn.com/search?q="
+        },
+        {
+            name: "arXiv",
+            url: "https://arxiv.org/search/?query="
+        },
+        {
+            name: "ResearchGate",
+            url: "https://www.researchgate.net/search.Search.html?query="
+        },
+        {
+            name: "ScienceDirect (Authors)",
+            url: "https://www.sciencedirect.com/search?authors="
+        },
+        {
+            name: "ScienceDirect (Date)",
+            url: "https://www.sciencedirect.com/search?date="
+        },
+        {
+            name: "ScienceDirect (Publisher)",
+            url: "https://www.sciencedirect.com/search?pub="
+        },
+        {
+            name: "ScienceDirect (Volume)",
+            url: "https://www.sciencedirect.com/search?volume="
+        },
+        {
+            name: "ACM Digital Library",
+            url: "https://dl.acm.org/action/doSearch?AllField="
+        },
+        {
+            name: "Carnegie Mellon University Robotics Institute",
+            url: "https://www.ri.cmu.edu/?s="
+        }
+    ];
+
+    function performSearch() {
+        const query = document.getElementById("searchQuery").value;
+        const resultContainer = document.getElementById("resultLinks");
+
+        resultContainer.innerHTML = ""; // Clear previous results
+
+        if (query) {
+            websites.forEach(site => {
+                const searchUrl = `${site.url}${encodeURIComponent(query)}`;
+                const linkElement = document.createElement('a');
+                linkElement.href = searchUrl;
+                linkElement.target = "_blank"; // Open in a new tab
+                linkElement.innerText = `Search "${query}" on ${site.name}`;
+                resultContainer.appendChild(linkElement);
+            });
+        } else {
+            resultContainer.innerHTML = "<p>Please enter a search query.</p>";
+        }
+    }
+    async function askChatGPT() {
+        console.log("Entered askChatGpt func");
+        
+        const query = document.getElementById("queryInput").value;
+        const responseContainer = document.getElementById("responseContainer");
+        responseContainer.innerHTML = "Fetching response...";
+
+        const response = await fetch('http://localhost:3000/ask', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ query: query })
+        });
+
+        const data = await response.json();
+        responseContainer.innerHTML = data.answer;
+        console.log("Exited askChatGpt func");
+    }
+  
+</script>
+<script src="script.js"></script>
+</body>
+</html>

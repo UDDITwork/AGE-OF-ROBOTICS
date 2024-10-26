@@ -1,0 +1,1184 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            align-items: center;
+            background-color: #f5f5f5;
+        }
+        .cow{
+  color:#0f0;
+}
+/* Styling for the Div with Circular Corners, Border, and Hover Shadow */
+.styled-div {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  border-radius: 15px; /* Circular corners */
+  border: 2px solid #3498db; /* Border around the div */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Hover Effect: Shadow and Scale */
+.styled-div:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+  transform: translateY(-5px); /* Slight upward movement on hover */
+}
+
+/* Main Rectangle Div Styling */
+.animated-div {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  margin: 50px auto;
+  max-width: 800px;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+
+/* Hover Effect for Main Div */
+.animated-div:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Image Container (Left - 20%) */
+.image-container {
+  flex: 0 0 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.high{
+  display: inline-block;
+  padding: 2px 6px;
+  background-color: rgb(57, 24, 43);
+  color: white;
+  border-radius: 3px;
+  font-size: 14px;
+}
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+/* Text Container (Right - 80%) */
+.text-container {
+  flex: 0 0 80%;
+  padding-left: 20px;
+  text-align: left;
+}
+/* CSS for the `.joker` Class */
+.mithai {
+  display: inline-block;
+  padding: 2px 6px;
+  background-color: red;
+  color: white;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+/* Button Styling */
+.scroll-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.scroll-button:hover {
+  background-color: #2980b9;
+}
+
+/* Bottom Slider Section */
+.bottom-slider {
+  background-color: #fafafa;
+  padding: 50px 20px;
+  border-top: 2px solid #3498db;
+  margin-top: 50px;
+  text-align: center;
+  display: none; /* Initially hidden */
+}
+/* Container for Buttons */
+.container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        /* Violet Buttons with white text */
+        .algo-button {
+            background-color: #8A2BE2; /* Violet */
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.5);
+        }
+
+        .algo-button:hover {
+            transform: scale(1.1);
+            background-color: #7A1EBB; /* Darker violet on hover */
+        }
+
+        /* Algorithm Information Blocks */
+        .algo-block {
+            width: 80%;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+            color: #fff;
+        }
+
+        .algo-block.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Algorithm Titles */
+        .algo-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        /* Algorithm Description */
+        .algo-description {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        /* Code Box */
+        .algo-code {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 1rem;
+            color: #0f0;
+            overflow-x: auto;
+            max-height: 200px;
+        }
+
+        /* Smooth Scrolling */
+        .scrolling-effect {
+            scroll-behavior: smooth;
+        }
+
+        /* Scrollbar Customization */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #8A2BE2;
+            border-radius: 10px;
+        }/* CSS for the `.joker` Class */
+.joker {
+  display: inline-block;
+  padding: 2px 6px;
+  background-color: rgb(77, 130, 199);
+  color: white;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+        
+    .container {
+          position: relative;
+          width: 90%;
+          max-width: 1200px;
+          display: flex;
+          justify-content: space-between;
+        
+        }
+    
+        .algo-button {
+  position: relative;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  width: 300px;
+  height: 200px;
+  margin-right: -60px; /* To create the overlap effect */
+  border-radius: 15px; /* Rounded corners */
+  border: 2px solid white; /* White border around the algo-button */
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left; /* Align the text to the left */
+  transition: transform 0.3s ease-in-out;
+}
+
+.algo-button:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  z-index: 10;
+}
+        .algo-button:nth-child(2) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(3) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(4) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(5) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(6) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(7) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(8) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(9) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(10) {
+          margin-left: -20%;
+        }
+    
+        /* Media queries for responsiveness */
+        @media (max-width: 1024px) {
+          .algo-button {
+            width: 40%;
+            height: 150px;
+          }
+        }
+    
+        @media (max-width: 768px) {
+          .algo-button {
+            width: 60%;
+            height: 120px;
+          }
+          .algo-button:nth-child(2),
+          .algo-button:nth-child(3),
+          .algo-button:nth-child(4),
+          .algo-button:nth-child(5),
+          .algo-button:nth-child(6),
+          .algo-button:nth-child(7),
+          .algo-button:nth-child(8),
+          .algo-button:nth-child(9),
+          .algo-button:nth-child(10) {
+            margin-left: -15%;
+          }
+        }
+    
+        @media (max-width: 480px) {
+          .algo-button {
+            width: 80%;
+            height: 100px;
+          }
+          .algo-button:nth-child(2),
+          .algo-button:nth-child(3),
+          .algo-button:nth-child(4),
+          .algo-button:nth-child(5),
+          .algo-button:nth-child(6),
+          .algo-button:nth-child(7),
+          .algo-button:nth-child(8),
+          .algo-button:nth-child(9),
+          .algo-button:nth-child(10) {
+            margin-left: -10%;
+          }
+        }
+        .circular-image-container {
+    display: inline-block;
+    margin-left: 10px; /* Space between the text and the image */
+  }
+  
+  /* Styling for Circular Image */
+  .circular-image {
+    width: 30px;   /* Adjust size for the icon */
+    height: 30px;  /* Match width for a perfect circle */
+    border-radius: 50%;  /* Makes the image circular */
+    object-fit: cover;   /* Ensures the image covers the circular container */
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); /* Adds a slight shadow */
+  }
+  /* General Body Styling */
+body {
+    font-family: 'Cardo', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #312454;
+    font-weight: 700;
+    overflow-x: hidden;
+  }
+  .mohan{
+    text-align:center;
+  }
+  /* Global Smooth Transition */
+  * {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: fadeInUp 1s ease-in-out;
+  }
+  
+  .hero-description {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 20px;
+  }
+  
+  .btn-primary {
+    display: inline-block;
+    background-color: #ff5c5c;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-primary:hover {
+    background-color: #ff3a3a;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Intro Section */
+  .intro-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(135deg, #3498db, #9b59b6);
+    color: white;
+    padding: 60px 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  /* Profile Image */
+  .profile-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
+    animation: bounceIn 2s ease-in-out;
+  }
+  
+  /* Typing Animation */
+  .typing-animation {
+    display: inline-block;
+    white-space: nowrap;
+    border-right: 2px solid rgba(255, 255, 255, 0.75);
+    animation: typing 3s steps(40, end), blink-caret 0.7s step-end infinite;
+  }
+  
+  .last-line {
+    display: inline-block;
+    white-space: nowrap;
+    border-right: 2px solid rgba(255, 255, 255, 0.75);
+    animation: typing 3s steps(40, end), blink-caret 0.7s step-end infinite;
+  }
+  
+  .no-blink {
+    border-right: none;
+  }
+  
+  /* Typing Animation Keyframes */
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: rgba(255, 255, 255, 0.75); }
+  }
+  
+  /* Fade-In Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  /* Fade-In-Up Animation */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Bounce-In Animation */
+  @keyframes bounceIn {
+    from { opacity: 0; transform: scale(0.9); }
+    50% { transform: scale(1.05); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  /* Styling for Footer Heading */
+h3 {
+    display: inline-flex; /* Aligns the text and image inline */
+    align-items: center;  /* Vertically centers the text and image */
+    font-size: 24px;
+    color: #fff;
+    margin: 0;
+  }
+  
+  /* Container for Circular Image */
+  .circular-image-container {
+    display: inline-block;
+    margin-left: 10px; /* Space between the text and the image */
+  }
+  
+  /* Styling for Circular Image */
+  .circular-image {
+    width: 30px;   /* Adjust size for the icon */
+    height: 30px;  /* Match width for a perfect circle */
+    border-radius: 50%;  /* Makes the image circular */
+    object-fit: cover;   /* Ensures the image covers the circular container */
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); /* Adds a slight shadow */
+  }
+  
+  /* Grid Container */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+  }
+  
+  .grid-item {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  .grid-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  
+  .grid-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .grid-item:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #282828;
+    color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+    animation: fadeInUp 2s ease-in-out;
+  }
+  /* Styling for Social Media Icons in Footer */
+.footer-icons {
+    display: flex;
+    justify-content: center;  /* Centers the icons */
+    gap: 20px;                /* Increased gap between the icons */
+    margin-top: 15px;
+  }
+  
+  .footer-icons a {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    width: 50px;              /* Increased size of the icon */
+    height: 50px;             /* Keep width and height equal for a square */
+    text-align: center;
+    line-height: 50px;        /* Vertically centers the icon */
+    border-radius: 50%;       /* Makes the icons circular */
+    font-size: 22px;          /* Increases the size of the icon */
+    transition: transform 0.3s, background-color 0.3s;
+  }
+  
+  /* Hover Effect for Icons */
+  .footer-icons a:hover {
+    transform: scale(1.1);    /* Slight scaling on hover for effect */
+    background-color: #575757; /* Change background color on hover */
+  }
+  /* General Styling */
+body {
+    font-family: 'Cardo', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    overflow-x: hidden;
+  }
+  
+  /* Main Rectangle Div Styling */
+  .animated-div {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin: 50px auto;
+    max-width: 800px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+  }
+  
+  /* Hover Effect for Main Div */
+  .animated-div:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Image Container (Left - 20%) */
+  .image-container {
+    flex: 0 0 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  /* Text Container (Right - 80%) */
+  .text-container {
+    flex: 0 0 80%;
+    padding-left: 20px;
+    text-align: left;
+  }
+  
+  /* Button Styling */
+  .scroll-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .scroll-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Bottom Slider Section */
+  .bottom-slider {
+    background-color: #fafafa;
+    padding: 50px 20px;
+    border-top: 2px solid #3498db;
+    margin-top: 50px;
+    text-align: center;
+    display: none; /* Initially hidden */
+  }
+/* General Styling */
+body {
+    font-family: 'Cardo', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    overflow-x: hidden;
+  }
+  
+  /* Main Rectangle Div Styling */
+  .animated-div {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin: 50px auto;
+    max-width: 800px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+  }
+  
+  /* Hover Effect for Main Div */
+  .animated-div:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Image Container (Left - 20%) */
+  .image-container {
+    flex: 0 0 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  /* Text Container (Right - 80%) */
+  .text-container {
+    flex: 0 0 80%;
+    padding-left: 20px;
+    text-align: left;
+  }
+  
+  /* Button Styling */
+  .scroll-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .scroll-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Bottom Slider Section */
+  .bottom-slider {
+    background-color: #fafafa;
+    padding: 50px 20px;
+    border-top: 2px solid #3498db;
+    margin-top: 50px;
+    text-align: center;
+    display: none; /* Initially hidden */
+  }
+/* General Styling */
+body {
+    font-family: 'Cardo', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    overflow-x: hidden;
+  }
+  
+  /* Main Rectangle Div Styling */
+  .animated-div {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin: 50px auto;
+    max-width: 800px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+  }
+  
+  /* Hover Effect for Main Div */
+  .animated-div:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Image Container (Left - 20%) */
+  .image-container {
+    flex: 0 0 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  /* Text Container (Right - 80%) */
+  .text-container {
+    flex: 0 0 80%;
+    padding-left: 20px;
+    text-align: left;
+  }
+  
+  /* Button Styling */
+  .scroll-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .scroll-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Bottom Slider Section */
+  .bottom-slider {
+    background-color: #fafafa;
+    padding: 50px 20px;
+    border-top: 2px solid #3498db;
+    margin-top: 50px;
+    text-align: center;
+    display: none; /* Initially hidden */
+  }
+      
+  /* Media Queries for Responsiveness */
+  @media (max-width: 1024px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+  
+    .profile-img {
+      width: 200px;
+      height: 200px;
+    }
+  
+    .intro-text {
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .intro-section {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .hero-title {
+      font-size: 2rem;
+    }
+  
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 1.8rem;
+    }
+  
+    .profile-img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+  
+
+        .chat-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .chat-box {
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+        .user-message {
+            background-color: #e3f2fd;
+            margin-left: 20%;
+        }
+        .bot-message {
+            background-color: #f5f5f5;
+            margin-right: 20%;
+        }
+        .input-container {
+            display: flex;
+            gap: 10px;
+        }
+        input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1976d2;
+        }
+        .loading {
+            margin: 10px 0;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<!-- Header Section -->
+<!-- Header Section with Navigation Bar -->
+<header style="display: flex; justify-content: center; align-items: center; background-color: #3498db; padding: 20px; border-radius: 15px; margin: 10px;">
+    <!-- Navigation Links -->
+    <nav style="display: flex; justify-content: center; gap: 20px;">
+      <!-- Link to the main page (index.html) -->
+      <a href="index.html" style="text-decoration: none; color: rgb(216, 163, 227); padding: 10px 15px; background-color: #0066cc; border-radius: 10px; transition: background-color 0.3s;">Home</a>
+      <!-- Link to the Lord page -->
+      <a href="lord.html" style="text-decoration: none; color: white; padding: 10px 15px; background-color: #0066cc; border-radius: 10px; transition: background-color 0.3s;">Lord Page</a>
+      <!-- Link to the God page -->
+      <a href="god.html" style="text-decoration: none; color: rgb(183, 133, 171); padding: 10px 15px; background-color: #0066cc; border-radius: 10px; transition: background-color 0.3s;">God Page</a>
+      <!-- Link to the Lucifer page -->
+      <a href="lucifer.html" style="text-decoration: none; color: rgb(204, 103, 184); padding: 10px 15px; background-color: #0066cc; border-radius: 10px; transition: background-color 0.3s;">Lucifer Page</a>
+      <!-- Link to the Master page -->
+      <a href="master.html" style="text-decoration: none; color: rgb(200, 135, 199); padding: 10px 15px; background-color: #0066cc; border-radius: 10px; transition: background-color 0.3s;">Master Page</a>
+    </nav>
+  </header>
+<body>
+    <div class="animated-div">
+        <!-- Circular Image on the Left (20%) -->
+        <div class="image-container">
+          <img src="uddit.jpeg" alt="Uddit" class="profile-image">
+        </div>
+        
+        <!-- Text and Button on the Right (80%) -->
+        <div class="text-container">
+          <h2>Welcome Enigmatic Robo Warriors !</h2>
+          <p>
+            Our mission is to explore, innovate, and revolutionize the world of robotics. From autonomous systems to AI-driven machines, robotics is transforming industries, enhancing efficiency, and pushing the boundaries of what’s possible. Here, you will find the latest insights into cutting-edge robotics technology, detailed guides on programming and algorithms, and comprehensive resources for both beginners and experts. Whether you’re a hobbyist, a student, or a professional, our platform is dedicated to empowering you with the knowledge and tools needed to create, understand, and master the world of robotics. Join us as we dive into a future where intelligent machines and humans work hand-in-hand to shape a smarter and more connected world.
+          </p>
+          <button class="scroll-button" onclick="scrollToSlider()">Click Me !</button>
+        </div>
+      </div>
+    
+    <div class="chat-container">
+        <h1>Enigma-Your Buddy in Robo-World !</h1>
+        <div class="chat-box" id="chatBox"></div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()" id="sendButton">Send</button>
+        </div>
+    </div>
+    <div class="bottom-slider" id="bottom-slider">
+        <h2>Discover My Projects</h2>
+        <p>This is the slider section located before the footer.</p>
+        <h1>Robotics Algorithms</h1>
+    
+        <div class="container">
+            <!-- Buttons for algorithms -->
+            <button class="algo-button" onclick="showAlgo('q-learning')">Q-Learning</button>
+            <button class="algo-button" onclick="showAlgo('dqn')">(DQN)</button>
+            <button class="algo-button" onclick="showAlgo('ppo')">(PPO)</button>
+            <button class="algo-button" onclick="showAlgo('ddpg')">(DDPG)</button>
+            <button class="algo-button" onclick="showAlgo('slam')">(SLAM)</button>
+            <button class="algo-button" onclick="showAlgo('rrt')">(RRT)</button>
+            <button class="algo-button" onclick="showAlgo('genetic')">Genetic Algorithm</button>
+        </div>
+    
+        <!-- Algorithm Information Blocks -->
+        <div id="q-learning" class="algo-block">
+            <h2 class="algo-title">Q-Learning</h2>
+            <p class="algo-description">Q-Learning is a model-free reinforcement learning algorithm to learn the value of actions in a state-action space.</p>
+            <div class="algo-code">
+                <code style="text-align: justify;">
+                  "Uddit’s expertise in full-stack development truly brought our vision to life.
+                   He took the time to understand our business needs and translated them into a website that not only looks stunning but performs flawlessly. 
+                   The responsive design has significantly boosted our user engagement, and we've seen a noticeable increase in our website traffic. 
+                   His ability to seamlessly blend aesthetics with functionality is unmatched. Highly recommended for anyone looking to build a robust online presence." 
+                  — Rahul, CEO of TechInnovate Solutions
+                </code>
+            </div>
+        </div>
+    
+        <div id="dqn" class="algo-block">
+          <h2 class="algo-title">(DQN)</h2>
+          <p class="algo-description">DQN combines Q-Learning with deep learning by using a neural network to approximate the Q-values for reinforcement learning problems.</p>
+          <div class="algo-code">
+              <code  style="text-align: justify;">
+                "Uddit was instrumental in transforming our outdated website into a modern, high-performing digital platform. 
+                From the initial consultation to the final deployment, he was attentive, responsive, and proactive in addressing our needs.
+                 He implemented a range of advanced features, including real-time analytics integration and seamless API connections, which have enhanced our operational efficiency.
+                The website's sleek design and intuitive navigation have received positive feedback from both our team and customers.
+                Uddit’s dedication and expertise have made a significant impact on our online strategy." 
+                — Neha, Operations Manager at BlueSky Ventures
+              </code>
+          </div>
+      </div>
+    
+    
+    
+        <div id="ppo" class="algo-block">
+            <h2 class="algo-title">(PPO)</h2>
+            <p class="algo-description">PPO is a policy gradient method that provides a balance between sample efficiency and ease of implementation for reinforcement learning tasks.</p>
+            <div class="algo-code">
+                <code  style="text-align: justify;">
+                  "Uddit's creativity and problem-solving skills far exceeded our expectations.
+                   He developed a robust e-commerce platform tailored to our specific needs, making it easy for us to manage inventory, process payments, and update content effortlessly.
+                    His user-friendly interface has simplified the buying experience for our customers, leading to a noticeable increase in sales. 
+                    Uddit's proactive support during and after the project ensured everything ran smoothly, and his suggestions for ongoing improvements were invaluable."
+                   — Sneha, Owner of Fashionista Boutique
+                </code>
+            </div>
+        </div>
+    
+        <div id="ddpg" class="algo-block">
+            <h2 class="algo-title">(DDPG)</h2>
+            <p class="algo-description">DDPG is an actor-critic method used for continuous action spaces, employing deterministic policies and Q-learning.</p>
+            <div class="algo-code">
+                <code  style="text-align: justify;">
+                  "Working with Uddit was a breeze! 
+                  He has a knack for breaking down complex requirements and turning them into intuitive and user-friendly features. 
+                  Throughout the development process, he communicated clearly, kept us informed of progress, and delivered everything on schedule.
+                   His expertise in both front-end and back-end technologies made our project a seamless experience, and the final product exceeded our expectations. 
+                   We’re thrilled with the results and look forward to future collaborations." 
+                  — Meera, Product Manager at DigiWave Inc.
+                </code>
+            </div>
+        </div>
+    
+        <div id="slam" class="algo-block">
+            <h2 class="algo-title">(SLAM)</h2>
+            <p class="algo-description">SLAM is the process by which a robot constructs a map of an unknown environment while simultaneously keeping track of its location.</p>
+            <div class="algo-code">
+                <code  style="text-align: justify;">
+                  "Uddit’s professionalism and deep understanding of web technologies are truly commendable.
+                   He not only delivered the project ahead of schedule but also ensured every detail was polished to perfection. 
+                   His proactive approach to problem-solving, combined with his technical skills, resulted in a website that’s visually appealing and highly functional. 
+                   The custom solutions he provided have streamlined our internal processes, saving us time and resources.
+                  He is, without a doubt, an asset to any team looking for a skilled developer." 
+                  — Kavita, Founder of EcomExpress
+                </code>
+            </div>
+        </div>
+    
+        <div id="rrt" class="algo-block">
+            <h2 class="algo-title">(RRT)</h2>
+            <p class="algo-description">RRT is a path planning algorithm designed for efficiently navigating robots through high-dimensional spaces.</p>
+            <div class="algo-code">
+                <code  style="text-align: justify;">
+                  "From start to finish, Uddit demonstrated exceptional communication, technical skills, and dedication.
+                  He took the time to understand our goals and provided valuable input to refine our initial ideas.
+                  The final website he delivered has significantly improved our user engagement, conversion rates, and overall online presence. 
+                  Uddit’s attention to detail and willingness to go the extra mile make him a standout developer in his field. 
+                  Our team couldn’t be happier with the results!"
+                  — Arjun, Marketing Director at CloudWorks
+                </code>
+            </div>
+        </div>
+    
+        <div id="genetic" class="algo-block">
+            <h2 class="algo-title">Genetic Algorithm</h2>
+            <p class="algo-description">Genetic algorithms simulate the process of natural selection to generate solutions to optimization and search problems.</p>
+            <div class="algo-code">
+                <code  style="text-align: justify;">
+                    # Genetic Algorithm Pseudocode
+                    initialize population with random solutions
+                    for each generation:
+                        evaluate fitness of population
+                        select parents based on fitness
+                        crossover parents to create new offspring
+                        mutate offspring randomly
+                        replace the least fit solutions with new offspring
+                </code>
+            </div>
+        </div>
+        </div>
+      <footer style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; background: (115deg, rgba(0,0,0,0.8) 0%, rgba(17,17,66,0.8) 25%, rgba(0,51,153,0.7) 50%, rgba(0,204,255,0.5) 75%, rgba(0,0,0,0.8) 100%);" >
+        <div class="footer-container">
+          <div class="footer-left">
+            <h3>
+              EXTRANOS 
+              <span class="circular-image-container">
+                <img src="uddit.jpeg" alt="Logo" class="circular-image">
+              </span>
+            </h3>
+            <br>
+            <p class="footer-links mithai">
+              <a href="#">Home</a> |
+              <a href="#">About</a> |
+              <a href="#">Services</a> |
+              <a href="#">Contact</a>
+            </p>
+            <p class="footer-company-name">© 2024 UDDIT, Full Stack Web Developer</p>
+          </div>
+          <div class="footer-center">
+            <div>
+              <i class="fa fa-map-marker-alt"></i>
+              <p class="high"><span>MNIT Jaipur, JLN Marg, Jaipur</span> 302017, Rajasthan</p>
+            </div>
+            <div>
+              <i class="fa fa-phone-alt"></i>
+              <p class="high">Phone: +91-7456886877</p>
+              <p class="high">WhatsApp: +91-9672538062</p>
+            </div>
+            <div>
+              <i class="fa fa-envelope"></i>
+              <p class="mithai"><a href="mailto:udditalerts247@gmail.com">udditalerts247@gmail.com</a></p>
+            </div>
+          </div>
+          <div class="footer-right">
+            <p class="footer-company-about">
+              <span>LET ME HELP YOU WITH A WEBSITE/APP</span><br>
+              Flutter, Firebase, Flutter, AWS, Docker, MERN, Python, Flask
+            </p>
+            <div class="footer-icons">
+              <a href="https://www.udditportfolio.online"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://x.com/UdditRise"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.linkedin.com/in/uddit-7258792ab/"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://github.com/UDDITwork"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+       
+      </footer>
+    <script>
+          setTimeout(() => {
+      const lastLine = document.querySelector('.last-line');
+      lastLine.classList.add('no-blink');
+    }, 3000); // Adjust timing to match typing speed
+    <!-- JavaScript for Smooth Scrolling -->
+
+  function scrollToSlider() {
+    const slider = document.getElementById('bottom-slider');
+    slider.style.display = 'block'; // Make the slider visible
+    slider.scrollIntoView({ behavior: 'smooth' }); // Smooth scroll to the slider section
+  }
+
+  function showAlgo(algoId) {
+            // Hide all blocks
+            document.querySelectorAll('.algo-block').forEach(block => {
+                block.style.display = 'none';
+            });
+
+            // Show the selected block
+            document.getElementById(algoId).style.display = 'block';
+        }
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function appendMessage(message, isUser) {
+            const chatBox = document.getElementById('chatBox');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.textContent = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function setLoading(isLoading) {
+            const button = document.getElementById('sendButton');
+            const input = document.getElementById('userInput');
+            button.disabled = isLoading;
+            input.disabled = isLoading;
+            button.textContent = isLoading ? 'Sending...' : 'Send';
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+            
+            appendMessage(message, true);
+            input.value = '';
+            setLoading(true);
+
+            try {
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ question: message })
+                });
+                
+                const data = await response.json();
+                appendMessage(data.response, false);
+            } catch (error) {
+                appendMessage('Error: Could not get response', false);
+            } finally {
+                setLoading(false);
+            }
+        }
+    </script>
+</body>
+</html>

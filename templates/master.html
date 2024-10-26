@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robotics Universe</title>
+  <!-- Google Fonts for Stylish Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* General Styles */
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000; /* Keep the dark background for the globe */
+      overflow-x: hidden;
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+    }
+
+    /* Canvas Styling */
+    canvas {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1; /* Ensure globe stays in the background */
+    }
+
+    /* Container for Content */
+    .content {
+      z-index: 2; /* Ensure content is above the globe */
+      width: 80%;
+      max-width: 1200px;
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.8); /* Semi-transparent black for content */
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0, 255, 0, 0.3);
+      margin-top: 100px;
+    }
+
+    /* 3D Heading Styling */
+    h1, h2 {
+      font-size: 2.5rem;
+      text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
+      margin-bottom: 20px;
+    }
+
+    /* Section Styling */
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      text-shadow: 0 0 8px #0f0, 0 0 12px #0f0;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    /* Text Content */
+    .section-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(0, 51, 0, 0.3); /* Dark green background for text */
+    }
+
+    /* List Styling */
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 10px;
+      background: rgba(0, 204, 0, 0.2);
+      margin-bottom: 10px;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    li:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #0f0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Canvas for Shining Globe -->
+  <canvas id="globeCanvas"></canvas>
+
+  <!-- Main Content Container -->
+  <div class="content">
+    <!-- 3D Title -->
+    <h1>Welcome to the World of Robotics</h1>
+
+    <!-- Section 1: Introduction to Robotics -->
+    <div class="section">
+      <h2 class="section-title"><i class="fas fa-robot"></i> Introduction to Robotics</h2>
+      <p class="section-content">
+        Robotics is a rapidly evolving field that combines mechanics, electronics, AI, and computer science to create intelligent machines capable of performing complex tasks. From autonomous vehicles to humanoid robots, robotics is shaping the future of technology.
+      </p>
+    </div>
+
+    <!-- Section 2: Recommended Books -->
+    <div class="section">
+      <h2 class="section-title"><i class="fas fa-book"></i> Recommended Books on Robotics</h2>
+      <ul>
+        <li><strong>"Introduction to Robotics: Mechanics and Control" by John J. Craig</strong> - A comprehensive book that covers essential concepts in robotics mechanics, dynamics, and control.</li>
+        <li><strong>"Robot Operating System (ROS) for Absolute Beginners" by Lentin Joseph</strong> - A beginner-friendly book for learning ROS and building robotic applications.</li>
+        <li><strong>"Robotics, Vision and Control" by Peter Corke</strong> - Covers the theory and practice of robotics with focus on computer vision and control.</li>
+        <li><strong>"Artificial Intelligence: A Guide for Thinking Humans" by Melanie Mitchell</strong> - An insightful book on AI, including its application in robotics.</li>
+        <li><strong>"Springer Handbook of Robotics" edited by Bruno Siciliano & Oussama Khatib</strong> - A detailed reference covering all aspects of robotics, from hardware to AI algorithms.</li>
+      </ul>
+    </div>
+
+    <!-- Section 3: Famous Universities in Robotics -->
+    <div class="section">
+      <h2 class="section-title"><i class="fas fa-university"></i> Top Universities for Robotics Research</h2>
+      <ul>
+        <li><strong>Massachusetts Institute of Technology (MIT)</strong> - Known for cutting-edge research in robotics, AI, and machine learning.</li>
+        <li><strong>Stanford University</strong> - A leader in AI and robotics research, focusing on autonomous systems and intelligent agents.</li>
+        <li><strong>Carnegie Mellon University</strong> - Renowned for its robotics institute, specializing in AI, computer vision, and machine learning.</li>
+        <li><strong>ETH Zurich</strong> - Famous for its advanced robotics research, including aerial robotics and robotic manipulation.</li>
+        <li><strong>University of Tokyo</strong> - A pioneer in humanoid and industrial robotics, making significant contributions to the field.</li>
+      </ul>
+    </div>
+
+    <!-- Section 4: Recent Inventions in Robotics -->
+    <div class="section">
+      <h2 class="section-title"><i class="fas fa-lightbulb"></i> Recent Innovations in Robotics</h2>
+      <ul>
+        <li><strong>Boston Dynamics' Spot</strong> - A versatile, agile robot capable of navigating complex terrains, widely used in industrial applications.</li>
+        <li><strong>Soft Robotics</strong> - The development of soft, flexible robotic structures that mimic human muscles, enhancing dexterity.</li>
+        <li><strong>Autonomous Drones</strong> - Drones equipped with AI for delivering goods, conducting surveillance, and performing rescue operations.</li>
+        <li><strong>Robotic Exoskeletons</strong> - Wearable robotics that assist people with mobility impairments, enabling them to walk and move freely.</li>
+        <li><strong>AI-Powered Robotic Surgery</strong> - Precision robotic arms controlled by AI for minimally invasive surgeries, improving patient outcomes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- JavaScript for 3D Shining Globe Effect -->
+  <script>
+    const canvas = document.getElementById('globeCanvas');
+    const ctx = canvas.getContext('2d');
+  
+    // Full-screen Canvas
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  
+    // Parameters for the globe
+    const numberOfDots = 500;
+    const radius = Math.min(canvas.width, canvas.height) / 3;
+    const dots = [];
+  
+    function randomRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+  
+    class Dot {
+      constructor() {
+        this.theta = randomRange(0, Math.PI * 2);
+        this.phi = randomRange(0, Math.PI);
+        this.size = randomRange(2, 4); // Increase the size slightly for brightness
+        this.x = 0;
+        this.y = 0;
+        this.z = 0;
+        this.updatePosition();
+      }
+  
+      updatePosition() {
+        const sinPhi = Math.sin(this.phi);
+        const cosPhi = Math.cos(this.phi);
+        const sinTheta = Math.sin(this.theta);
+        const cosTheta = Math.cos(this.theta);
+  
+        this.x = radius * sinPhi * cosTheta;
+        this.y = radius * sinPhi * sinTheta;
+        this.z = radius * cosPhi;
+      }
+  
+      draw() {
+        const perspective = 500 / (500 - this.z);
+        const x2D = canvas.width / 2 + this.x * perspective;
+        const y2D = canvas.height / 2 + this.y * perspective;
+        const size2D = this.size * perspective;
+  
+        // Drawing the glowing green dot with enhanced brightness
+        ctx.beginPath();
+        ctx.arc(x2D, y2D, size2D, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 255, 0, 1)'; // Increased opacity to 1
+        ctx.shadowColor = 'rgba(0, 255, 0, 1)'; // More intense shadow color
+        ctx.shadowBlur = 20; // Increased shadow blur for stronger glow
+        ctx.fill();
+      }
+  
+      rotateY(angle) {
+        const cosAngle = Math.cos(angle);
+        const sinAngle = Math.sin(angle);
+        const x = this.x * cosAngle - this.z * sinAngle;
+        const z = this.x * sinAngle + this.z * cosAngle;
+  
+        this.x = x;
+        this.z = z;
+      }
+  
+      rotateX(angle) {
+        const cosAngle = Math.cos(angle);
+        const sinAngle = Math.sin(angle);
+        const y = this.y * cosAngle - this.z * sinAngle;
+        const z = this.y * sinAngle + this.z * cosAngle;
+  
+        this.y = y;
+        this.z = z;
+      }
+    }
+  
+    for (let i = 0; i < numberOfDots; i++) {
+      dots.push(new Dot());
+    }
+  
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+      for (const dot of dots) {
+        dot.rotateY(0.01);
+        dot.rotateX(0.005);
+        dot.draw();
+      }
+  
+      requestAnimationFrame(animate);
+    }
+  
+    animate();
+  </script>
+</body>
+</html>

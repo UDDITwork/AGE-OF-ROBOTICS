@@ -1,0 +1,500 @@
+/* General Body Styling */
+body {
+    font-family: 'Cardo', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #312454;
+    font-weight: 700;
+    overflow-x: hidden;
+  }
+  .mohan{
+    text-align:center;
+  }
+  /* Global Smooth Transition */
+  * {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: fadeInUp 1s ease-in-out;
+  }
+  
+  .hero-description {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 20px;
+  }
+  
+  .btn-primary {
+    display: inline-block;
+    background-color: #ff5c5c;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-primary:hover {
+    background-color: #ff3a3a;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Intro Section */
+  .intro-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(135deg, #3498db, #9b59b6);
+    color: white;
+    padding: 60px 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  /* Profile Image */
+  .profile-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
+    animation: bounceIn 2s ease-in-out;
+  }
+  
+  /* Typing Animation */
+  .typing-animation {
+    display: inline-block;
+    white-space: nowrap;
+    border-right: 2px solid rgba(255, 255, 255, 0.75);
+    animation: typing 3s steps(40, end), blink-caret 0.7s step-end infinite;
+  }
+  
+  .last-line {
+    display: inline-block;
+    white-space: nowrap;
+    border-right: 2px solid rgba(255, 255, 255, 0.75);
+    animation: typing 3s steps(40, end), blink-caret 0.7s step-end infinite;
+  }
+  
+  .no-blink {
+    border-right: none;
+  }
+  
+  /* Typing Animation Keyframes */
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: rgba(255, 255, 255, 0.75); }
+  }
+  
+  /* Fade-In Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  /* Fade-In-Up Animation */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Bounce-In Animation */
+  @keyframes bounceIn {
+    from { opacity: 0; transform: scale(0.9); }
+    50% { transform: scale(1.05); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  /* Styling for Footer Heading */
+h3 {
+    display: inline-flex; /* Aligns the text and image inline */
+    align-items: center;  /* Vertically centers the text and image */
+    font-size: 24px;
+    color: #fff;
+    margin: 0;
+  }
+  
+  /* Container for Circular Image */
+  .circular-image-container {
+    display: inline-block;
+    margin-left: 10px; /* Space between the text and the image */
+  }
+  
+  /* Styling for Circular Image */
+  .circular-image {
+    width: 30px;   /* Adjust size for the icon */
+    height: 30px;  /* Match width for a perfect circle */
+    border-radius: 50%;  /* Makes the image circular */
+    object-fit: cover;   /* Ensures the image covers the circular container */
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); /* Adds a slight shadow */
+  }
+  
+  /* Grid Container */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+  }
+  
+  .grid-item {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  .grid-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  
+  .grid-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .grid-item:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #282828;
+    color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+    animation: fadeInUp 2s ease-in-out;
+  }
+  /* Styling for Social Media Icons in Footer */
+.footer-icons {
+    display: flex;
+    justify-content: center;  /* Centers the icons */
+    gap: 20px;                /* Increased gap between the icons */
+    margin-top: 15px;
+  }
+  
+  .footer-icons a {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    width: 50px;              /* Increased size of the icon */
+    height: 50px;             /* Keep width and height equal for a square */
+    text-align: center;
+    line-height: 50px;        /* Vertically centers the icon */
+    border-radius: 50%;       /* Makes the icons circular */
+    font-size: 22px;          /* Increases the size of the icon */
+    transition: transform 0.3s, background-color 0.3s;
+  }
+  
+  /* Hover Effect for Icons */
+  .footer-icons a:hover {
+    transform: scale(1.1);    /* Slight scaling on hover for effect */
+    background-color: #575757; /* Change background color on hover */
+  }
+  /* General Styling */
+body {
+    font-family: 'Cardo', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    overflow-x: hidden;
+  }
+  
+  /* Main Rectangle Div Styling */
+  .animated-div {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin: 50px auto;
+    max-width: 800px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+  }
+  
+  /* Hover Effect for Main Div */
+  .animated-div:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Image Container (Left - 20%) */
+  .image-container {
+    flex: 0 0 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  /* Text Container (Right - 80%) */
+  .text-container {
+    flex: 0 0 80%;
+    padding-left: 20px;
+    text-align: left;
+  }
+  
+  /* Button Styling */
+  .scroll-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .scroll-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Bottom Slider Section */
+  .bottom-slider {
+    background-color: #fafafa;
+    padding: 50px 20px;
+    border-top: 2px solid #3498db;
+    margin-top: 50px;
+    text-align: center;
+    display: none; /* Initially hidden */
+  }
+/* General Styling */
+body {
+    font-family: 'Cardo', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    overflow-x: hidden;
+  }
+  
+  /* Main Rectangle Div Styling */
+  .animated-div {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin: 50px auto;
+    max-width: 800px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+  }
+  
+  /* Hover Effect for Main Div */
+  .animated-div:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Image Container (Left - 20%) */
+  .image-container {
+    flex: 0 0 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  /* Text Container (Right - 80%) */
+  .text-container {
+    flex: 0 0 80%;
+    padding-left: 20px;
+    text-align: left;
+  }
+  
+  /* Button Styling */
+  .scroll-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .scroll-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Bottom Slider Section */
+  .bottom-slider {
+    background-color: #fafafa;
+    padding: 50px 20px;
+    border-top: 2px solid #3498db;
+    margin-top: 50px;
+    text-align: center;
+    display: none; /* Initially hidden */
+  }
+/* General Styling */
+body {
+    font-family: 'Cardo', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    overflow-x: hidden;
+  }
+  
+  /* Main Rectangle Div Styling */
+  .animated-div {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin: 50px auto;
+    max-width: 800px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+  }
+  
+  /* Hover Effect for Main Div */
+  .animated-div:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Image Container (Left - 20%) */
+  .image-container {
+    flex: 0 0 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  /* Text Container (Right - 80%) */
+  .text-container {
+    flex: 0 0 80%;
+    padding-left: 20px;
+    text-align: left;
+  }
+  
+  /* Button Styling */
+  .scroll-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .scroll-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Bottom Slider Section */
+  .bottom-slider {
+    background-color: #fafafa;
+    padding: 50px 20px;
+    border-top: 2px solid #3498db;
+    margin-top: 50px;
+    text-align: center;
+    display: none; /* Initially hidden */
+  }
+      
+  /* Media Queries for Responsiveness */
+  @media (max-width: 1024px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+  
+    .profile-img {
+      width: 200px;
+      height: 200px;
+    }
+  
+    .intro-text {
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .intro-section {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .hero-title {
+      font-size: 2rem;
+    }
+  
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 1.8rem;
+    }
+  
+    .profile-img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+  

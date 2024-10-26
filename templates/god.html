@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Algorithms</title>
+    <header style="display: flex; justify-content: center; align-items: center; background-color: #3498db; padding: 20px; border-radius: 15px; margin: 10px;">
+        <ul style="display: flex; flex-direction: column; align-items: center; padding: 0; list-style: none;" class="MAHAN">
+          <li style="--i:6; margin: 10px 0;" data-icon="&#xf015" class="MAHANTA">
+            <a href="index.html" style="text-decoration: none; color: white;">PAGE 1</a>
+          </li>
+          <li style="--i:5; margin: 10px 0;" data-icon="&#xf2bb" class="MAHANTA">
+            <a href="lord.html" style="text-decoration: none; color: white;">PAGE 2</a>
+          </li>
+          <li style="--i:4; margin: 10px 0;" data-icon="&#xf03a" class="MAHANTA">
+            <a href="lucifer.html" style="text-decoration: none; color: white;">PAGE 3</a>
+          </li>
+          <li style="--i:3; margin: 10px 0;" data-icon="&#xf07c" class="MAHANTA">
+            <a href="master.html" style="text-decoration: none; color: white;">PAGE 4</a>
+          </li>
+          <li style="--i:2; margin: 10px 0;" data-icon="&#xe533" class="MAHANTA">
+            <a href="god.html" style="text-decoration: none; color: white;">PAGE 5</a>
+          </li>
+          <li style="--i:1; margin: 10px 0;" data-icon="&#x40" class="MAHANTA">
+            <a href="https://www.udditportfolio.online" style="text-decoration: none; color: white;">PAGE 6</a>
+          </li>
+        </ul>
+      </header>
+      
+      
+    <style>
+     .MAHANTA { position: relative; 
+        list-style: none; 
+        width: 200px; 
+        padding: 15px; 
+        background: #3e3f46;
+         z-index: calc(1 * var(--i));
+          transition: 0.5s;
+           transform-origin: bottom; 
+           transform: skewY(-15deg); } 
+           .MAHANTA:hover { background: #996fae; transform: translateX(-50px); } 
+           .MAHANTA a { text-decoration: none; color: #999; } 
+           .MAHANTA:hover a { color: #fff; }
+            .MAHANTA::before { font-family: "FontAwesome"; 
+            color: #999; 
+            display: flex;
+             justify-content: center;
+              align-items: center; content: attr(data-icon); 
+              position: absolute;
+               top: 0; 
+               left: -40px;
+                width: 40px;
+                 height: 100%; 
+                 background: #2e3133;
+                  transform-origin: bottom;
+                   transform: skewX(45deg); } 
+                   .MAHANTA::after { content: "";
+                    position: absolute; 
+                    top: -40px; 
+                    left: 0px;
+                     width: 100%; 
+                     height: 40px; 
+                     background: #35383e;
+                      transition: 0.5s; 
+                      transform-origin: bottom;
+                       transform: skewX(45deg); } 
+                       .MAHANTA:last-child::after { box-shadow: -120px 120px 20px rgba(0, 0, 0, 0.25); }
+    </style>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .MAHAN{list-style: none; perspective: 1000px;}
+            footer {
+            background-color: #111;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+           
+        }
+        .joker {
+  display: inline-block;
+  padding: 2px 6px;
+  background-color: rgb(55, 82, 117);
+  color: white;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+        .mithai {
+  display: inline-block;
+  padding: 2px 6px;
+  background-color: red;
+  color: white;
+  border-radius: 3px;
+  font-size: 14px;
+}
+    
+    html, body {
+            height: 100%;
+        }
+
+        /* Background Aurora effect */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(115deg, rgba(0,0,0,0.8) 0%, rgba(17,17,66,0.8) 25%, rgba(0,51,153,0.7) 50%, rgba(0,204,255,0.5) 75%, rgba(0,0,0,0.8) 100%);
+            background-size: 200% 200%;
+            color: #fff;
+            overflow-x: hidden;
+            animation: auroraEffect 10s ease infinite;
+        }
+
+        /* Aurora Animation */
+        @keyframes auroraEffect {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Main Title */
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+        }
+
+        /* Container for Buttons */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        /* Violet Buttons with white text */
+        .algo-button {
+            background-color: #8A2BE2; /* Violet */
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.5);
+        }
+
+        .algo-button:hover {
+            transform: scale(1.1);
+            background-color: #7A1EBB; /* Darker violet on hover */
+        }
+
+        /* Algorithm Information Blocks */
+        .algo-block {
+            width: 80%;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+            color: #fff;
+        }
+
+        .algo-block.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Algorithm Titles */
+        .algo-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        /* Algorithm Description */
+        .algo-description {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        /* Code Box */
+        .algo-code {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 1rem;
+            color: #0f0;
+            overflow-x: auto;
+            max-height: 200px;
+        }
+
+        /* Smooth Scrolling */
+        .scrolling-effect {
+            scroll-behavior: smooth;
+        }
+
+        /* Scrollbar Customization */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #8A2BE2;
+            border-radius: 10px;
+        }
+        
+    .container {
+          position: relative;
+          width: 90%;
+          max-width: 1200px;
+          display: flex;
+          justify-content: space-between;
+        }
+        footer {
+      background-color: #23233f;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+        .algo-button {
+  position: relative;
+  background-color: black;
+  color: white;
+  padding: 20px;
+  width: 300px;
+  height: 200px;
+  margin-right: -60px; /* To create the overlap effect */
+  border-radius: 15px; /* Rounded corners */
+  border: 2px solid white; /* White border around the algo-button */
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left; /* Align the text to the left */
+  transition: transform 0.3s ease-in-out;
+}
+.parent-div {
+      display: flex; /* Use Flexbox to align child divs horizontally */
+      justify-content: space-between; /* Space divs evenly with gaps in between */
+      padding: 20px;
+      background-color: #f0f0f0;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      max-width: 1200px;
+      margin: 0 auto; /* Center the parent div on the page */
+    }
+
+    /* Styling for Each Child Div */
+    .child-div {
+      background-color: #3498db; /* Blue background for visibility */
+      color: white;
+      padding: 20px;
+      flex: 1; /* Each div takes equal space */
+      margin: 0 10px; /* Horizontal margin between divs */
+      text-align: center;
+      border-radius: 5px;
+    }
+.algo-button:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  z-index: 10;
+}
+        .algo-button:nth-child(2) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(3) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(4) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(5) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(6) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(7) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(8) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(9) {
+          margin-left: -20%;
+        }
+    
+        .algo-button:nth-child(10) {
+          margin-left: -20%;
+        }
+    
+        /* Media queries for responsiveness */
+        @media (max-width: 1024px) {
+          .algo-button {
+            width: 40%;
+            height: 150px;
+          }
+        }
+    
+        @media (max-width: 768px) {
+          .algo-button {
+            width: 60%;
+            height: 120px;
+          }
+          .algo-button:nth-child(2),
+          .algo-button:nth-child(3),
+          .algo-button:nth-child(4),
+          .algo-button:nth-child(5),
+          .algo-button:nth-child(6),
+          .algo-button:nth-child(7),
+          .algo-button:nth-child(8),
+          .algo-button:nth-child(9),
+          .algo-button:nth-child(10) {
+            margin-left: -15%;
+          }
+        }
+    
+        @media (max-width: 480px) {
+          .algo-button {
+            width: 80%;
+            height: 100px;
+          }
+          .algo-button:nth-child(2),
+          .algo-button:nth-child(3),
+          .algo-button:nth-child(4),
+          .algo-button:nth-child(5),
+          .algo-button:nth-child(6),
+          .algo-button:nth-child(7),
+          .algo-button:nth-child(8),
+          .algo-button:nth-child(9),
+          .algo-button:nth-child(10) {
+            margin-left: -10%;
+          }
+        }
+        html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%; /* Make sure the body takes the full viewport height */
+      display: flex;
+      flex-direction: column;
+    }
+  
+
+    /* Header */
+   
+    /* Search Bar Styling */
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .search-bar input[type="text"] {
+      width: 60%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .search-bar button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .search-bar button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Response Section */
+    .response-section {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #e0f7fa;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      display: none; /* Initially hidden */
+    }
+
+    /* Resources Section */
+    .resources {
+      margin-top: 40px;
+    }
+
+    /* List Styling */
+   
+
+    li:hover {
+      background-color: #2980b9;
+    }
+    </style>
+</head>
+<body class="scrolling-effect">
+
+    <h1>Robotics Algorithms</h1>
+
+    <div class="container">
+        <!-- Buttons for algorithms -->
+        <button class="algo-button" onclick="showAlgo('q-learning')">Q-Learning</button>
+        <button class="algo-button" onclick="showAlgo('dqn')">Deep Q-Network (DQN)</button>
+        <button class="algo-button" onclick="showAlgo('ppo')">Proximal Policy Optimization (PPO)</button>
+        <button class="algo-button" onclick="showAlgo('ddpg')">Deep Deterministic Policy Gradient (DDPG)</button>
+        <button class="algo-button" onclick="showAlgo('slam')">Simultaneous Localization and Mapping (SLAM)</button>
+        <button class="algo-button" onclick="showAlgo('rrt')">Rapidly-Exploring Random Tree (RRT)</button>
+        <button class="algo-button" onclick="showAlgo('genetic')">Genetic Algorithm</button>
+    </div>
+
+    <!-- Algorithm Information Blocks -->
+    <div id="q-learning" class="algo-block">
+        <h2 class="algo-title">Q-Learning</h2>
+        <p class="algo-description">Q-Learning is a model-free reinforcement learning algorithm to learn the value of actions in a state-action space.</p>
+        <div class="algo-code">
+            <code>
+                # Q-Learning Algorithm Example in Python
+                import numpy as np
+
+                def q_learning(env, num_episodes, learning_rate, gamma, epsilon):
+                    Q = np.zeros([env.observation_space.n, env.action_space.n])
+                    for i in range(num_episodes):
+                        state = env.reset()
+                        done = False
+                        while not done:
+                            action = np.argmax(Q[state, :] + np.random.randn(1, env.action_space.n) * (1.0 / (i + 1)))
+                            next_state, reward, done, _ = env.step(action)
+                            Q[state, action] = Q[state, action] + learning_rate * (reward + gamma * np.max(Q[next_state, :]) - Q[state, action])
+                            state = next_state
+                    return Q
+            </code>
+        </div>
+    </div>
+
+    <div id="dqn" class="algo-block">
+        <h2 class="algo-title">Deep Q-Network (DQN)</h2>
+        <p class="algo-description">DQN combines Q-Learning with deep learning by using a neural network to approximate the Q-values for reinforcement learning problems.</p>
+        <div class="algo-code">
+            <code>
+                # DQN Example Pseudocode
+                initialize replay memory and Q-network
+                for each episode:
+                    initialize state
+                    for each step:
+                        choose action using epsilon-greedy policy
+                        perform action, get next state and reward
+                        store transition in replay memory
+                        sample random batch from replay memory
+                        perform gradient descent on the batch
+            </code>
+        </div>
+    </div>
+
+    <div id="ppo" class="algo-block">
+        <h2 class="algo-title">Proximal Policy Optimization (PPO)</h2>
+        <p class="algo-description">PPO is a policy gradient method that provides a balance between sample efficiency and ease of implementation for reinforcement learning tasks.</p>
+        <div class="algo-code">
+            <code>
+                # PPO Pseudocode
+                initialize actor and critic networks
+                for each episode:
+                    for each timestep in the environment:
+                        collect states, actions, and rewards
+                        calculate advantage estimates using the critic
+                        update the actor network using policy gradient
+                        update the critic network using value loss
+            </code>
+        </div>
+    </div>
+
+    <div id="ddpg" class="algo-block">
+        <h2 class="algo-title">Deep Deterministic Policy Gradient (DDPG)</h2>
+        <p class="algo-description">DDPG is an actor-critic method used for continuous action spaces, employing deterministic policies and Q-learning.</p>
+        <div class="algo-code">
+            <code>
+                # DDPG Algorithm Pseudocode
+                initialize actor and critic networks
+                initialize replay buffer
+                for each episode:
+                    for each step:
+                        select action with noise for exploration
+                        store transition in replay buffer
+                        sample random batch from buffer
+                        update actor and critic networks using gradient descent
+            </code>
+        </div>
+    </div>
+
+    <div id="slam" class="algo-block">
+        <h2 class="algo-title">Simultaneous Localization and Mapping (SLAM)</h2>
+        <p class="algo-description">SLAM is the process by which a robot constructs a map of an unknown environment while simultaneously keeping track of its location.</p>
+        <div class="algo-code">
+            <code>
+                # SLAM - General Workflow
+                1. Sense the environment using sensors (e.g., LIDAR, Camera)
+                2. Perform scan matching or feature detection
+                3. Use algorithms like EKF or Particle Filter to localize
+                4. Update the map with the new observations
+            </code>
+        </div>
+    </div>
+
+    <div id="rrt" class="algo-block">
+        <h2 class="algo-title">Rapidly-Exploring Random Tree (RRT)</h2>
+        <p class="algo-description">RRT is a path planning algorithm designed for efficiently navigating robots through high-dimensional spaces.</p>
+        <div class="algo-code">
+            <code>
+                # RRT Algorithm Pseudocode
+                initialize tree with starting position
+                for each iteration:
+                    sample random point in the space
+                    find nearest node in the tree to the point
+                    steer towards the point
+                    if the path is valid, add it to the tree
+            </code>
+        </div>
+    </div>
+
+    <div id="genetic" class="algo-block">
+        <h2 class="algo-title">Genetic Algorithm</h2>
+        <p class="algo-description">Genetic algorithms simulate the process of natural selection to generate solutions to optimization and search problems.</p>
+        <div class="algo-code">
+            <code>
+                # Genetic Algorithm Pseudocode
+                initialize population with random solutions
+                for each generation:
+                    evaluate fitness of population
+                    select parents based on fitness
+                    crossover parents to create new offspring
+                    mutate offspring randomly
+                    replace the least fit solutions with new offspring
+            </code>
+        </div>
+    </div>
+    <div class="parent-div">
+        <!-- Three Parallel Child Divs -->
+        <div class="child-div" style="text-align:left;">
+            <h3>Research Gate</h3>
+            <ul>
+       <li><p>
+            <a href="https://www.researchgate.net/publication/344784883_Robotics_and_Artificial_Intelligence">Robotics and Artificial Intelligence </a>
+        </p></li>
+        <hr>
+       <li> <p><a href="https://www.researchgate.net/publication/316538824_Dissecting_Robotics_-_historical_overview_and_future_perspectives">Dissecting Robotics - historical overview and future perspectives</a></p>
+       </li>
+       <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/315651938_Open-Source_and_Widely_Disseminated_Robot_Hardware_From_the_Guest_Editors">Open-Source and Widely Disseminated Robot Hardware From the Guest Editors</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/243784317_An_Integrated_Navigation_and_Motion_Control_System_for_Autonomous_Multisensory_Mobile_Robots">An Integrated Navigation and Motion Control System for Autonomous Multisensory Mobile Robots</a></p>
+        </li><hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/46299340_Social_Robots_Challenges_for_Machine_Intelligence?_sg%5B0%5D=2xiyAC03_RLm14VxWS_woQj93kdKsyDpnw8xyRGh0JlJMMjbtSso6t5IwR4v6vESx0BnrNq4v8DQkyo.PnS0A03V3FQ-fMH4ubt0GyYZEpY_eZVtqoeR6peMQMfM1fQpRSaMJbaH3TfxSx087ZgWxPLT89-iSbs-aa45fg&_sg%5B1%5D=_KszKJL471BCWiDI3BrZqe7_4P_RDyg-xm_fs2kfPe-vhhRQqZp8xsM1ACUnvi2liUbgSO-Jt3j7lVDKOJSJDBldAtM.PnS0A03V3FQ-fMH4ubt0GyYZEpY_eZVtqoeR6peMQMfM1fQpRSaMJbaH3TfxSx087ZgWxPLT89-iSbs-aa45fg&_sg%5B2%5D=WPYZ1NxL5nYhYWukBDWRzlytg4fde7m-EKQYiuCJ4Zli21pssg0WKG0tfI7E1AaxpSqXhEcnG1SOikg3ww.PnS0A03V3FQ-fMH4ubt0GyYZEpY_eZVtqoeR6peMQMfM1fQpRSaMJbaH3TfxSx087ZgWxPLT89-iSbs-aa45fg&_sgd%5Bsr%5D=1&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6InB1YmxpY2F0aW9uIiwicGFnZSI6InB1YmxpY2F0aW9uIiwicHJldmlvdXNQYWdlIjoicHVibGljYXRpb24iLCJwb3NpdGlvbiI6InBhZ2VDb250ZW50In19">Social Robots: Challenges for Machine Intelligence (Extended)</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/46299340_Social_Robots_Challenges_for_Machine_Intelligence">Social Robots: Challenges for Machine Intelligence</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/272702687_The_European_Cognitive_Robot_Companion_Project">The European Cognitive Robot Companion Project</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/4177615_A_decisional_framework_for_autonomous_robots_interacting_with_humans">A Decisional Framework for Autonomous Robots Interacting with Humans</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/330505388_SHARY_a_supervision_system_adapted_to_Human-Robot_Interaction">SHARY: A Supervision System Adapted to Human-Robot Interaction</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/3631352_PRS_a_high_level_supervision_and_control_language_for_autonomous_mobile_robots">PRS: A High-Level Supervision and Control Language for Autonomous Mobile Robots</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/221067481_Bringing_Together_Human_and_Robotic_Environment_Representations_-_A_Pilot_Study">Bringing Together Human and Robotic Environment Representations - A Pilot Study</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/4174013_Supervision_and_interaction">Supervision and Interaction</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/261268420_On_human_models_for_collaborative_robots">On Human Models for Collaborative Robots</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/221473552_Supervision_and_motion_planning_for_a_mobile_manipulator_interacting_with_humans">Supervision and Motion Planning for a Mobile Manipulator Interacting with Humans</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/255665496_Une_architecture_decisionnelle_pour_l'interaction_homme-robot">Une Architecture Décisionnelle pour l'Interaction Homme-Robot</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/221251043_Toward_Human-Aware_Robot_Task_Planning">Toward Human-Aware Robot Task Planning</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/255598788_Towards_Human-Aware_Cognitive_Robots">Towards Human-Aware Cognitive Robots</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/221320133_A_study_of_interaction_between_dialog_and_decision_for_human-robot_collaborative_task_achievement">A Study of Interaction Between Dialog and Decision for Human-Robot Collaborative Task Achievement</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/220806662_SHARY_A_Supervision_System_Adapted_to_Human-Robot_Interaction">SHARY: A Supervision System Adapted to Human-Robot Interaction (Alternative)</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/220756538_A_management_of_mutual_belief_for_human-robot_interaction">A Management of Mutual Belief for Human-Robot Interaction</a></p>
+        </li>
+        <hr>
+        <li>
+          <p><a href="https://www.researchgate.net/publication/234794913_Task_planning_for_human-robot_interaction">Task Planning for Human-Robot Interaction</a></p>
+        </li>
+        <hr>
+      </ul>
+    </div>      
+     </div>
+        <div class="child-div" style="text-align:left;">
+          <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Type a topic from the book...">
+            <button onclick="searchSummary()">Search Summary</button>
+          </div>
+      
+          <!-- Response Section -->
+          <div class="response-section" id="responseSection" style="color:#23233f;">
+            <h2>Summary Result:</h2>
+            <p id="responseText">Your summary will appear here...</p>
+          </div>
+      
+          <!-- Book Section -->
+          <section>
+            <h2 class="mithai">Read the Best Robotics Book</h2><hr>
+            <p>
+              <strong>"Introduction to Robotics: Mechanics and Control"</strong> by John J. Craig.<br><hr>
+              <a href="Introduction-to-Robotics-3rd-edition.pdf" target="_blank">Click here to read the book</a>.
+            </p>
+          </section>
+      
+          <!-- Resources Section -->
+        </div>
+        <div class="child-div" style="text-align:left;"><section class="resources">
+          <h2 class="mithai">Recommended YouTube Channels to Learn Robotics</h2>
+          <ul>
+            <li><a href="https://www.youtube.com/user/RoboticsAIChannel" target="_blank">Robotics & AI YouTube Channel</a></li>
+            <li><a href="https://www.youtube.com/user/MIT" target="_blank">MIT OpenCourseWare YouTube Channel</a></li>
+            <li><a href="https://www.youtube.com/user/sparkfun" target="_blank">SparkFun Electronics YouTube Channel</a></li>
+            <li><a href="https://www.youtube.com/user/RoboticistsChannel" target="_blank">Roboticist’s Channel</a></li>
+            <li><a href="https://www.youtube.com/user/IEEESpectrum" target="_blank">IEEE Spectrum YouTube Channel</a></li>
+          </ul>
+        </section></div>
+      </div>
+      <div class="child-div" style="text-align: left;">
+        <p>
+          <ul>
+            <li><h3 class="mithai">Probabilistic Robotics</h3> <hr>
+              
+Authors: Sebastian Thrun, Wolfram Burgard, Dieter Fox<br>
+Overview: This book provides a comprehensive introduction to probabilistic approaches in robotics, emphasizing techniques like localization, mapping, and control under uncertainty. The book introduces key algorithms for sensor fusion, navigation, and decision-making.<br>
+Key Topics: SLAM (Simultaneous Localization and Mapping), probabilistic reasoning, sensor models, particle filters.<br>
+Impact: Fundamental resource for understanding probabilistic methods in robotics.</li>
+<ul>
+  <li>
+    <h3 class="mithai">Planning Algorithms</h3>
+    <hr>
+    <p class="joker">Authors</p>: Steven M. LaValle<br>
+    <p class="joker">Overview</p>: This book is a seminal work that covers planning algorithms for robotics. It discusses motion planning, discrete planning, planning under uncertainty, and various algorithms essential for navigation and path planning.<br>
+    <p class="joker">Key Topics</p>: Motion planning, probabilistic roadmaps, rapidly-exploring random trees (RRT), computational geometry.<br>
+    <p class="joker">Impact</p>: Key reference for planning techniques in robotics, often cited in research.
+  </li>
+
+  <li>
+    <h3 class="mithai">Autonomous Mobile Robots</h3>
+    <hr>
+    <p class="joker">Authors</p>: Roland Siegwart, Illah R. Nourbakhsh, Davide Scaramuzza<br>
+    <p class="joker">Overview</p>: This book provides a solid foundation for understanding the concepts behind autonomous robots. It covers topics ranging from kinematics and perception to localization, mapping, and navigation.<br>
+    <p class="joker">Key Topics</p>: Mobile robot kinematics, perception systems, SLAM, autonomous navigation.<br>
+    <p class="joker">Impact</p>: Widely used as a textbook in robotic courses, a key resource for understanding mobile robotics.
+  </li>
+
+  <li>
+    <h3 class="mithai">Deep Reinforcement Learning for Robotic Manipulation with Asynchronous Off-Policy Updates</h3>
+    <hr>
+    <p class="joker">Authors</p>: Tuomas Haarnoja, Aurick Zhou, Pieter Abbeel, Sergey Levine<br>
+    <p class="joker">Overview</p>: This paper introduces soft actor-critic (SAC) methods for robotic manipulation tasks using deep reinforcement learning. It shows how policy learning can be done efficiently using asynchronous off-policy updates.<br>
+    <p class="joker">Key Topics</p>: Deep reinforcement learning, robotic manipulation, policy learning, soft actor-critic (SAC).<br>
+    <p class="joker">Impact</p>: Influential in the field of deep reinforcement learning for robots, especially for manipulation tasks.
+  </li>
+
+  <li>
+    <h3 class="mithai">Robust Real-Time Face Detection</h3>
+    <hr>
+    <p class="joker">Authors</p>: Paul Viola, Michael Jones<br>
+    <p class="joker">Overview</p>: This paper presents the Viola-Jones algorithm for face detection, which is widely used in robotics for real-time object and face detection.<br>
+    <p class="joker">Key Topics</p>: Computer vision, object detection, real-time processing, Haar-like features.<br>
+    <p class="joker">Impact</p>: A foundational method in computer vision, often implemented in robotics for visual processing.
+  </li>
+
+  <li>
+    <h3 class="mithai">A Survey of Motion Planning and Control Techniques for Self-driving Urban Vehicles</h3>
+    <hr>
+    <p class="joker">Authors</p>: Katrakazas, Charalambous, Quddus, and Deka<br>
+    <p class="joker">Overview</p>: This paper provides a comprehensive survey of the algorithms and methodologies used for motion planning and control in autonomous driving.<br>
+    <p class="joker">Key Topics</p>: Autonomous driving, motion planning, control systems, decision-making.<br>
+    <p class="joker">Impact</p>: A key reference for research on autonomous vehicles and urban mobility.
+  </li>
+
+  <li>
+    <h3 class="mithai">FastSLAM: A Factored Solution to the Simultaneous Localization and Mapping Problem</h3>
+    <hr>
+    <p class="joker">Authors</p>: Montemerlo, Thrun, Koller, Wegbreit<br>
+    <p class="joker">Overview</p>: This paper introduces the FastSLAM algorithm, which is a particle filter-based method for solving the SLAM problem in robotics, particularly useful in environments with high uncertainty.<br>
+    <p class="joker">Key Topics</p>: SLAM, particle filters, robotics navigation, mapping.<br>
+    <p class="joker">Impact</p>: Highly influential in the development of efficient SLAM techniques.
+  </li>
+
+  <li>
+    <h3 class="mithai">Model Predictive Path Integral Control for Fast Aggressive Quadrotor Flight</h3>
+    <hr>
+    <p class="joker">Authors</p>: David B. Panerati, Liam Paul, Arash Rahmani, Angela Schoellig<br>
+    <p class="joker">Overview</p>: This paper focuses on Model Predictive Control (MPC) for fast and agile quadrotor maneuvers. It presents a method for optimizing flight paths using predictive control.<br>
+    <p class="joker">Key Topics</p>: Model Predictive Control, quadrotor flight, path optimization, control systems.<br>
+    <p class="joker">Impact</p>: Influential in aerial robotics, particularly for drones and UAVs.
+  </li>
+</ul>
+
+      </div>
+      
+    <script>
+        function searchSummary() {
+      const searchInput = document.getElementById('searchInput').value.toLowerCase();
+      const responseSection = document.getElementById('responseSection');
+      const responseText = document.getElementById('responseText');
+
+      // Dummy data - Replace this with real data or a server-side search
+      const summaries = {
+        "kinematics": "Kinematics is the study of motion without considering forces. It includes concepts like forward and inverse kinematics.",
+        "dynamics": "Dynamics deals with the forces that cause motion, including torque and inertia. It's crucial for understanding robotic movements.",
+        "inverse manipulator kinematics": "Inverse kinematics is a fundamental problem in robotics that involves determining the joint angles of a manipulator given a desired position and orientation of its end-effector. This is the inverse of forward kinematics, which calculates the end-effector pose from given joint angles. Solving inverse kinematics is often challenging due to the nonlinear nature of the kinematic equations and the potential for multiple solutions. Several methods are employed to address this problem: Geometric Methods: Suitable for simple manipulators with specific geometries. Involves analyzing the geometric relationships between links and joints to derive closed-form solutions. Analytical Methods: Applicable to certain types of manipulators with specific kinematic structures. Involves algebraic manipulation of the forward kinematics equations to obtain solutions for joint angles. Numerical Methods: General-purpose methods that can be applied to a wide range of manipulators. Iterative techniques like Newton-Raphson or gradient descent are commonly used to find solutions numerically. Closed-Form Solutions: Ideal for manipulators with simple kinematics. Involve deriving explicit mathematical expressions for joint angles in terms of end-effector pose. The choice of method depends on the complexity of the manipulator, the desired accuracy, and the computational resources available. Inverse kinematics is essential for tasks like motion planning, trajectory generation, and robot control. By accurately determining the joint angles required to achieve a desired end-effector pose, robots can perform complex tasks with precision and efficiency.Control systems are used to manage the behavior of robots, involving feedback loops and stability analysis.",
+        "manipulator dynamics": "Manipulator dynamics governs the relationship between forces, torques, and motion in robotic systems. A common approach is the Lagrangian formulation, which involves defining kinetic and potential energy, and using Lagrange's equations to derive the equations of motion, typically expressed as M(q)q̈ + C(q, q̇)q̇ + g(q) = τ. Here, M(q) represents the inertia matrix, C(q, q̇) accounts for Coriolis and centrifugal forces, g(q) is the gravity vector, τ is the joint torque vector, and q, q̇, and q̈ are joint positions, velocities, and accelerations, respectively. Alternatively, the Newton-Euler formulation applies Newton's laws to each link, offering computational efficiency for certain manipulators. Understanding manipulator dynamics is crucial for tasks such as trajectory planning, control system design, and simulation, enabling accurate prediction and efficient control of robot behavior.Sensors are essential for a robot's perception of the environment, including vision sensors, proximity sensors, and more.",
+        "jacobians -velocities and static forces": "Jacobians: Velocities and Static Forces in Robotics In the realm of robotics, the Jacobian matrix emerges as a fundamental tool for understanding and controlling robot kinematics and dynamics. This mathematical construct provides a bridge between joint-space velocities and end-effector velocities, as well as between end-effector forces and joint torques.Velocity Kinematics.At its core, the Jacobian matrix, denoted as J, relates the joint velocities of a robot to the linear and angular velocities of its end-effector. Mathematically, this relationship is expressed as: It is derived from the kinematic chain of the robot, encapsulating the geometric relationships between joints and the end-effector. In velocity kinematics, the Jacobian relates joint velocities (θ̇) to the end-effector's linear and angular velocities (v) through the equation v = J * θ̇. In static force analysis, the Jacobian's transpose (Jᵀ) relates end-effector wrenches (f) to joint torques (τ) using the equation τ = Jᵀ * f. This dual nature of the Jacobian makes it invaluable in various robotics applications, including inverse kinematics, singularity analysis, motion planning, force control, and dynamic simulation. By understanding and utilizing the Jacobian matrix, roboticists can achieve precise control, analysis, and simulation of robot systems"
+ };
+
+      // Check if the search term matches a summary
+      if (summaries[searchInput]) {
+        responseText.textContent = summaries[searchInput];
+      } else {
+        responseText.textContent = "No summary found for the topic. Please try another keyword.";
+      }
+
+      // Display the response section
+      responseSection.style.display = "block";
+    }
+
+        function showAlgo(algoId) {
+            // Hide all blocks
+            document.querySelectorAll('.algo-block').forEach(block => {
+                block.style.display = 'none';
+            });
+
+            // Show the selected block
+            document.getElementById(algoId).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
