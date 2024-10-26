@@ -43,7 +43,7 @@ heroku create
 This will create a new app and set up a Git remote called heroku.
 Deploy to Heroku:
 
-Push your code to Heroku:
+Push your code to Heroku: 
 
 
 git push heroku main
